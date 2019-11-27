@@ -8,6 +8,5 @@ app.use('/public', express.static('public'))
 app.get('/', function(req, res){
     res.sendFile(path.join(__dirname+'/population.html'));
 });
-
 app.listen(8080);
 console.log('Express server started');
