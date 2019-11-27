@@ -1,7 +1,13 @@
-//let d3 = require('d3');
-//var svg= d3.select('#dona').append('svg');
-//svg.append('rect').attr('x', 50).attr('y', 50).attr('width', 200).attr('height', 100) .attr('fill', 'green');
-data = d3.csv("tab.csv");
-console.log(data);
-//var bar = d3.select('#dona').selectAll('rect').data(data).enter().append('rect').attr('width', function(d) {  return d; }).attr('height', barHeight - 1).attr('transform', function(d, i) {return "translate(0," + i * barHeight + ")";});
+var d3= require('d3')
+var express = require('express');
+var fs = require('fs');
+var app = express();
+const path = require('path');
 
+app.use('/public', express.static('public'))
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname+'/index.html'));
+});
+
+app.listen(8080);
+console.log('Express server started');
