@@ -1,3 +1,9 @@
+/*Programa realizado por Brayan Quirino
+27 de noviembre de 2019
+basado en la libreria d3.js
+esta es la primer vizualización, basada en este codigo:
+https://bl.ocks.org/mbostock/4062085#population.csv
+los datos(population.csv) fueron tomados de https://www.inegi.org.mx/app/tabulados/interactivos/default?px=Poblacion_01&bd=Poblacion*/
 var margin = {top: 20, right: 40, bottom: 30, left: 20},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom,
@@ -20,47 +26,47 @@ var yAxis = d3.svg.axis()
     .tickSize(-width)
     .tickFormat(function(d) { return Math.round(d / 1e6) + "M"; });*/
 
-// An SVG element with a bottom-right origin.
 var svg = d3.select("body").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-// A sliding container to hold the bars by birthyear.
+// birthyears ontendra a todas las barras
 var birthyears = svg.append("g")
     .attr("class", "birthyears");
 
-// A label for the current year.
+// El año en que se encuentra la gráfica
 var title = svg.append("text")
     .attr("class", "title")
     .attr("dy", ".71em")
     .text(2000);
 
 d3.csv("/public/population.csv", function(error, data) {
-  // Compute the extent of the data set in age and years.
+  // Se leen los datos y se transforman a numero
   data.forEach(function(d) {
     d.people = +d.people;
     d.year = +d.year;
     d.age = +d.age;
   });
+  //se toma el maximo y el minimo 
   var age1 = d3.max(data, function(d) { return d.age; }),
       year0 = d3.min(data, function(d) { return d.year; }),
       year1 = d3.max(data, function(d) { return d.year; }),
       year = year1;
 
-  // Update the scale domains.
+  // se actualizan el domio de la recta x y y
   x.domain([year1 - age1, year1]);
   y.domain([0, d3.max(data, function(d) { return d.people; })]);
 
-  // Produce a map from year and birthyear to [male, female].
+  // se produce el rectangulo o base para los generos masculino y femenino
   data = d3.nest()
       .key(function(d) { return d.year; })
       .key(function(d) { return d.year - d.age; })
       .rollup(function(v) { return v.map(function(d) { return d.people; }); })
       .map(data);
 
-  // Add an axis to show the population values.
+  //se dibujan los valores finalmente 
   svg.append("g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + width + ",0)")
@@ -69,7 +75,6 @@ d3.csv("/public/population.csv", function(error, data) {
     .filter(function(value) { return !value; })
       .classed("zero", true);
 
-  // Add labeled rects for each birthyear (so that no enter or exit is required).
   var birthyear = birthyears.selectAll(".birthyear")
       .data(d3.range(year0 - age1, year1 + 1, 5))
     .enter().append("g")
@@ -84,12 +89,11 @@ d3.csv("/public/population.csv", function(error, data) {
       .attr("y", y)
       .attr("height", function(value) { return height - y(value); });
 
-  // Add labels to show birthyear.
   birthyear.append("text")
       .attr("y", height - 4)
       .text(function(birthyear) { return birthyear; });
 
-  // Add labels to show age (separate; not animated).
+  // Se coloca los valores de la recta x
   svg.selectAll(".age")
       .data(d3.range(0, age1 + 1, 5))
     .enter().append("text")
@@ -99,7 +103,7 @@ d3.csv("/public/population.csv", function(error, data) {
       .attr("dy", ".71em")
       .text(function(age) { return age; });
 
-  // Allow the arrow keys to change the displayed year.
+  // Se ariende a las teclas (dercha, izquierda)
   window.focus();
   d3.select(window).on("keydown", function() {
     switch (d3.event.keyCode) {
