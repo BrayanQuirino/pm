@@ -6,11 +6,29 @@
 svg {
     font: 10px sans-serif;
   }
-  
+  #right{
+    float: right;
+    text-align: center;
+  }
   .y.axis path {
     display: none;
   }
-  
+  .boton_personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: blueviolet;
+    border-radius: 6px;
+    border: 2px solid violet;
+  }
+  #footer{
+    height: 6em;
+    background-color: blueviolet;
+    text-align: center;
+    width: 900px;
+  }
   .y.axis line {
     stroke: #fff;
     stroke-opacity: .2;

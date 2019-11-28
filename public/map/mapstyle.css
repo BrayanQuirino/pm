@@ -28,6 +28,22 @@
   #right{
     float: right;
   }
+  #footer{
+    height: 6em;
+    background-color: #45BF55;
+    text-align: center;
+    width: 900px;
+  }
+  .boton_personalizado{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #45BF55;
+    border-radius: 6px;
+    border: 2px solid green;
+  }
   #p1{
     background-color: #97EDBA;
   }
