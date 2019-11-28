@@ -25,3 +25,31 @@
     font: 300 78px Helvetica Neue;
     fill: #666;
   }
+  #right{
+    float: right;
+  }
+  #p1{
+    background-color: #97EDBA;
+  }
+  #p2{
+    background-color: #8FE039;
+  }
+  #p3{
+    background-color:#45BF55;
+  }
+  #p4{
+    background-color: #1F9C10;
+    color: white;
+  }
+  #p5{
+    background-color: #167F39;
+    color: white;
+  }
+  #p6{
+    background-color: #044C29;
+    color: white;
+  }
+  #p7{
+    background-color: #00261C;
+    color: white;
+  }
