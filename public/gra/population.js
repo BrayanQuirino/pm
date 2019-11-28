@@ -42,7 +42,7 @@ var title = svg.append("text")
     .attr("dy", ".71em")
     .text(2000);
 
-d3.csv("/public/population.csv", function(error, data) {
+d3.csv("/public/gra/population.csv", function(error, data) {
   // Se leen los datos y se transforman a numero
   data.forEach(function(d) {
     d.people = +d.people;

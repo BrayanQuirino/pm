@@ -5,8 +5,9 @@ var app = express();
 const path = require('path');
 
 app.use('/public', express.static('public'))
+//app.use('/mapprueba', express.static('public'))
 app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname+'/population.html'));
+    res.sendFile(path.join(__dirname+'/mapprueba/index.html'));
 });
 app.listen(8080);
 console.log('Express server started');
